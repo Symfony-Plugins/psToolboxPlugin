@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+
+input.ps-test {
+  border: 1px solid #C1C1C1;
+}
+
+div.ps-wfjta {
+  border: 1px solid #C1C1C1;
+  width: 298px;
+  padding: 0 0 4px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+div.ps-wfjta.ps-wfjta-empty {
+  padding: 0;
+}
+
+/* BEGIN HIDE */
+div.ps-wfjta select {
+  display: none;
+}
+
+div.ps-wfjta hr {
+  margin: 0px;
+  clear: both;
+  visibility: hidden;
+  border: 0px;
+  height: 0px;
+}
+/* END HIDE */
+
+
+/* BEGIN TOKENS */
+div.ps-wfjta ul.ps-wfjta-tokens {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  padding: 0 0 4px 0;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li {
+  cursor: pointer;
+  margin: 4px 0 0 4px;
+  background-image: url(../images/token.gif);
+  background-repeat: no-repeat;
+  color: #666666;
+  white-space: nowrap;
+  float: left;
+}
+
+div.ps-wfjta.ps-wfjta-empty ul.ps-wfjta-tokens li {
+  margin: 0;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-selected {
+  background-image: url(../images/token-selected.gif);
+  color: #333333;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li span {
+  display: block;
+  background-image: url(../images/token.gif);
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-selected span {
+  background-image: url(../images/token-selected.gif);
+}
+
+
+div.ps-wfjta ul.ps-wfjta-tokens li span span {
+  background-position: right bottom;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li span span span {
+  background-position: left bottom;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li span span span span {
+  background-image: none;
+  padding: 2px 5px 2px 5px;
+}
+
+
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-input {
+  background-image: none;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-input input {
+  border: 0px;
+  margin: 0px;
+  width: 50px;
+  background: transparent;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li a.ps-wfjta-close {
+  color: transparent;
+  background-image: url(../images/cross.gif);
+  height: 14px;
+  padding: 0 1px 0 0;
+}
+
+/* END TOKENS */
+
+/* BEGIN FEED */
+#ps-wfjta-feed {
+  position: absolute;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  background-color: #ffffff;
+  border: 1px solid #C1C1C1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+#ps-wfjta-feed li {
+  padding: 4px;
+}
+#ps-wfjta-feed li.ps-wfjta-selected {
+  background-color: #F2F2F2;
+}
+#ps-wfjta-feed li em {
+  font-weight: bold;
+  color: #FE6000;
+  background-color: #F2F2F2;
+  padding: 1px;
+}
+/* END FEED */

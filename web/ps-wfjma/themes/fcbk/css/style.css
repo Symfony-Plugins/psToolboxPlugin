@@ -1,0 +1,115 @@
+@CHARSET "UTF-8";
+
+div.ps-wfjta {
+  border: 1px solid #8496BA;
+  width: 300px;
+  height: 23px;
+  padding: 0 0 4px 0;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+}
+
+/* BEGIN HIDE */
+div.ps-wfjta select {
+  display: none;
+}
+
+div.ps-wfjta hr {
+  margin: 0px;
+  clear: both;
+  visibility: hidden;
+  border: 0px;
+  height: 0px;
+}
+/* END HIDE */
+
+
+/* BEGIN TOKENS */
+div.ps-wfjta ul.ps-wfjta-tokens {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  padding: 0 0 4px 0;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li {
+  cursor: pointer;
+  margin: 4px 0 0 4px;
+  background-image: url(../images/token.gif);
+  background-repeat: no-repeat;
+  color: #000000;
+  white-space: nowrap;
+  float: left;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-selected {
+  background-image: url(../images/token-selected.gif);
+  color: #FFFFFF;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li span {
+  display: block;
+  background-image: url(../images/token.gif);
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-selected span {
+  background-image: url(../images/token-selected.gif);
+}
+
+
+div.ps-wfjta ul.ps-wfjta-tokens li span span {
+  background-position: right bottom;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li span span span {
+  background-position: left bottom;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li span span span span {
+  background-image: none;
+  padding: 2px 5px 2px 5px;
+}
+
+
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-input {
+  background-image: none;
+}
+div.ps-wfjta ul.ps-wfjta-tokens li.ps-wfjta-input input {
+  border: 0px;
+  margin: 0px;
+  width: 50px;
+  background: transparent;
+}
+
+div.ps-wfjta ul.ps-wfjta-tokens li a.ps-wfjta-close {
+  color: transparent;
+  background-image: url(../images/cross.gif);
+  background-repeat: no-repeat;
+}
+
+/* END TOKENS */
+
+/* BEGIN FEED */
+#ps-wfjta-feed {
+  position: absolute;
+  background-color: #FFFFFF;
+  border: 1px solid #BDC7D8;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+}
+#ps-wfjta-feed li {
+  padding: 4px;
+  border-bottom: 1px solid #DFDFDF;
+}
+#ps-wfjta-feed li.ps-wfjta-selected {
+  background-color: #405A95;
+  color: #FFFFFF;
+}
+#ps-wfjta-feed li em {
+  font-weight: bold;
+  font-style: normal;
+  background-color: #DAE0EB;
+}
+#ps-wfjta-feed li.ps-wfjta-selected em {
+  background-color: #5670A6;
+}
+/* END FEED */

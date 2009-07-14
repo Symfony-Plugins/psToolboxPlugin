@@ -1,0 +1,45 @@
+psToolboxPlugin
+===============
+
+The `psToolboxPlugin` is a symfony plugin that may provide various tools in the future.
+
+For now it contains a widget called `psWidgetFormJQueryTokenAutocompleter` that favourably replace a `select` element when many choices are available.
+You can found similar widgets on f***book mailbox, on ap*le mail application, on ap*le *phone sms application...
+
+Using the widget
+----------------
+
+  * Create two actions. 
+
+    [php]
+    class exampleActions extends sfActions
+    {
+      protected $results = array(
+        1 => 'Jean Claude',
+        2 => 'Marie Louise',
+        3 => 'Jacques Henri',
+        4 => 'Henri Jean',
+        5 => 'Claude Marie'
+      );
+    
+      public function executeSearch(sfWebRequest $request)
+      {
+        // use this parameter for your real query
+        $q = $request->getParameter('q', '');
+      
+        $results = array();
+        foreach($this->results as $id => $label)
+        {
+          if (false===strstr($label, $q)) continue;
+          array_push($results, array('id' => $id, 'label' => $label));
+        }
+        
+        $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+        return $this->renderText('(' . json_encode($results) . ')');
+      }
+      
+      public function executeDefault(sfWebRequest $request)
+      {
+      }
+    }
+    

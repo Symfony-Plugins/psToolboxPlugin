@@ -6,7 +6,7 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
   {
     $this->addRequiredOption('default');
     $this->addOption('multiple', true);
-    $this->addOption('load_url');
+    $this->addOption('init_url');
     $this->addOption('search_url');
     $this->addOption('formatter');
     $this->addOption('theme');
@@ -32,7 +32,7 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
     $theme = $this->getOption('theme', '');
     if ($theme)
     {
-      $javascripts[] = "/psToolboxPlugin/ps-wfjma/themes/$theme/js/formatter.js";
+      $javascripts[] = "/psToolboxPlugin/ps-wfjta/themes/$theme/js/formatter.js";
     }
     
     return $javascripts;
@@ -45,7 +45,7 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
     $theme = $this->getOption('theme', '');
     if ($theme)
     {
-      $stylesheets["/psToolboxPlugin/ps-wfjma/themes/$theme/css/style.css"] = 'screen';
+      $stylesheets["/psToolboxPlugin/ps-wfjta/themes/$theme/css/style.css"] = 'screen';
     }
     
     return $stylesheets;
@@ -56,7 +56,7 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
     $options = array(
       'select' => '%id%',
       'urls' => array(
-        'load' => $this->getOption('load_url', ''), 
+        'init' => $this->getOption('init_url', ''), 
         'search' => $this->getOption('search_url', '')
       )
     );
@@ -65,7 +65,7 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
     $theme = $this->getOption('theme', '');
     if ($theme)
     {
-      $options['formatter'] = 'psWFJMAFormatter';
+      $options['formatter'] = 'psWFJTAFormatter';
     }
     else
     {
@@ -86,7 +86,7 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
 
     $javascript = '<script type="text/javascript">new psWidgetFormJQueryTokenAutocompleter(%options%);</script>';
     
-    $html  = "<div$widgetId class=\"ps-wfjma ps-wfjma-empty\">";
+    $html  = "<div$widgetId class=\"ps-wfjta ps-wfjta-empty\">";
     $html .= parent::render($name, $value, $attributes, $errors);
     $html .= "</div>";
     $html .= str_replace('%options%', json_encode($options), $javascript);

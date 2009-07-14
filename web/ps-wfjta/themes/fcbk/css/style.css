@@ -3,7 +3,7 @@
 div.ps-wfjta {
   border: 1px solid #8496BA;
   width: 300px;
-  height: 23px;
+  min-height: 23px;
   padding: 0 0 4px 0;
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
   font-size: 11px;

@@ -187,9 +187,9 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
       defaultValues.push(this.value);
       optionByValue[this.value] = this;
     });
-    if (widget.options.urls.load != null && widget.options.urls.load != '') {
-      jQuery.get(widget.options.urls.load, {
-        'defaults[]' : defaultValues
+    if (widget.options.urls.init != null && widget.options.urls.init != '') {
+      jQuery.get(widget.options.urls.init, {
+        'default[]' : defaultValues
       }, function(data) {
         jQuery.each(data, function(index, value) {
           widget.addToken(value, jQuery(optionByValue[value.id]));

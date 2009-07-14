@@ -1,5 +1,4 @@
-psToolboxPlugin
-===============
+# psToolboxPlugin #
 
 The `psToolboxPlugin` is a symfony plugin that may provide various tools in the future.
 
@@ -7,122 +6,128 @@ For now it contains a widget called `psWidgetFormJQueryTokenAutocompleter` that 
 You can found similar widgets on f***book mailbox, on ap*le mail application, on ap*le *phone sms application...
 
 
-Using the widget
-----------------
+## Using the widget ##
 
-  * Create two actions. 'init' action will be used to populate tokens using default values. 'search' action will be used for... search !
+  * Create two actions. `init` action will be used to populate tokens using default values. `search` action will be used for... search !
 
-    [php]
-    class exampleActions extends sfActions
-    {
-      protected $results = array(
-        1 => 'Jean Claude',
-        2 => 'Marie Louise',
-        3 => 'Jacques Henri',
-        4 => 'Henri Jean',
-        5 => 'Claude Marie'
-      );
-      
-      public function executeInit(sfWebRequest $request)
-      {
-        $results = array();
-        $default = $request->getParameter('default', array());
-        
-        if ($default)
+        [php]
+        class exampleActions extends sfActions
         {
-          foreach($default as $id)
+          protected $results = array(
+            1 => 'Jean Claude',
+            2 => 'Marie Louise',
+            3 => 'Jacques Henri',
+            4 => 'Henri Jean',
+            5 => 'Claude Marie'
+          );
+
+          public function executeInit(sfWebRequest $request)
           {
-            if (isset($this->results[$id]))
+            $results = array();
+            $default = $request->getParameter('default', array());
+
+            if ($default)
             {
-              array_push($results, array('id' => $id, 'label' => $this->results[$id]));
+              foreach($default as $id)
+              {
+                if (isset($this->results[$id]))
+                {
+                  array_push($results, array('id' => $id, 'label' => $this->results[$id]));
+                }
+              }
             }
-          }
-        }
-        
-        $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
-        return $this->renderText('(' . json_encode($results) . ')');
-      }
-      
-      public function executeSearch(sfWebRequest $request)
-      {
-        $results = array();
-        $q = $request->getParameter('q', '');
-      
-        if ($q)
-        {
-          foreach($this->results as $id => $label)
-          {
-            if (false===stristr($label, $q)) continue;
-            array_push($results, array('id' => $id, 'label' => $label));
-          }
-        }
-        
-        $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
-        return $this->renderText('(' . json_encode($results) . ')');
-      }
-    }
-    
-  * Create two routes in your routing.yml file
-  
-    [yml]
-    autocomplete_init:
-      url: /autocomplete/init
-      param: { module: example, action: init }
 
-    autocomplete_search:
-      url: /autocomplete/search
-      param: { module: example, action: search }
-    
+            $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+            return $this->renderText('(' . json_encode($results) . ')');
+          }
+
+          public function executeSearch(sfWebRequest $request)
+          {
+            $results = array();
+            $q = $request->getParameter('q', '');
+
+            if ($q)
+            {
+              foreach($this->results as $id => $label)
+              {
+                if (false===stristr($label, $q)) continue;
+                array_push($results, array('id' => $id, 'label' => $label));
+              }
+            }
+
+            $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+            return $this->renderText('(' . json_encode($results) . ')');
+          }
+        }
+
+  * Create two routes in your routing.yml file
+
+        [yml]
+        autocomplete_init:
+          url: /autocomplete/init
+          param: { module: example, action: init }
+
+        autocomplete_search:
+          url: /autocomplete/search
+          param: { module: example, action: search }
+
   * Add the widget to your form
-  
-    [php]
-    public function configure()
-    {
-      // (...)
-      
-      $this->setWidget('author', new psWidgetFormJQueryTokenAutocompleter(array(
-        'default' => array(1, 2, 3),
-        'init_url' => url_for('autocomplete_init'),
-        'search_url' => url_for('autocomplete_search'),
-        'theme' => 'fcbk'
-      )));
-      
-      $this->setValidator('author', new sfValidatorChoiceMany(array(
-        'choices' => array(1, 2, 3, 4, 5)
-      )));
-      
-      // (...)
-    }
-    
+
+        [php]
+        public function configure()
+        {
+          // (...)
+
+          $this->setWidget('author', new psWidgetFormJQueryTokenAutocompleter(array(
+            'default' => array(1, 2),
+            'init_url' => url_for('autocomplete_init'),
+            'search_url' => url_for('autocomplete_search'),
+            'theme' => 'fcbk'
+          )));
+
+          $this->setValidator('author', new sfValidatorChoiceMany(array(
+            'choices' => array(1, 2, 3, 4, 5)
+          )));
+
+          // (...)
+        }
+        
     Actually two themes are available : 'fcbk' and 'lrn', but you can customize the widget as explained later in this document.
-    
+
   * Don't forget to load jquery library in your views, and to load form javascripts and stylesheets
-  
-    [php]
-    <?php include_javascript('jquery/jquery-1.3.2.min.js') ?>
-    <?php include_stylesheets_for_form($form) ?>
-    <?php include_javascripts_for_form($form) ?>
-    
-    <?php echo $form ?>
-    
+
+        [php]
+        <?php include_javascript('jquery/jquery-1.3.2.min.js') ?>
+        <?php include_stylesheets_for_form($form) ?>
+        <?php include_javascripts_for_form($form) ?>
+
+        <?php echo $form ?>
+        
   * It should work now !
-  
-  
-Customizing the widget
-----------------------
+
+## Customizing the widget ##
 
 You can of course create your own css files (take a look at the provided themes css)
 
-If you need more control, say you need to display a small picture inside each token, you can create your own javascript formatter,
-then use widget's 'formatter'.
+If you need more control, say you need to display a small picture inside each token, you can create your own javascript formatter.
+Please note that '%close%' will be replaced by the close link.
 
     [javascript]
     sampleFormatter = {
       formatToken: function(data) {
-        return '<img src="' + data.img + '" />' + data.label + ' %close%';
+        return '<img src="' + data.img + '" />' + data.label + ' %close%'
       },
       formatFeedItem: function(data) {
         return data.label;
       }
     }
-    
+
+Then you can use widget's 'formatter' option.
+
+    [php]
+    $this->setWidget('author', new psWidgetFormJQueryTokenAutocompleter(array(
+      'default' => array(1, 2),
+      'init_url' => url_for('autocomplete_init'),
+      'search_url' => url_for('autocomplete_search'),
+      'formatter' => 'sampleFormatter'
+    )));

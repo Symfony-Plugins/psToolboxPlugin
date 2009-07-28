@@ -4,21 +4,12 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
 {
   public function configure($options = array(), $attributes = array())
   {
-    $this->addRequiredOption('default');
+    $this->addOption('choices', array());
     $this->addOption('multiple', true);
+    $this->addOption('theme', 'fcbk');
     $this->addOption('init_url');
     $this->addOption('search_url');
     $this->addOption('formatter');
-    $this->addOption('theme');
-    
-    if (isset($options['default']) && is_array($options['default']))
-    {
-      $this->options['choices'] = array();
-      foreach ($options['default'] as $value)
-      {
-        $this->options['choices'][$value] = $value;
-      }
-    }
     
     parent::configure($options, $attributes);
   }
@@ -49,6 +40,34 @@ class psWidgetFormJQueryTokenAutocompleter extends sfWidgetFormSelectMany
     }
     
     return $stylesheets;
+  }
+  
+  protected function getOptionsForSelect($value, $choices)
+  {
+    $mainAttributes = $this->attributes;
+    $this->attributes = array();
+
+    if (!is_array($value))
+    {
+      $value = array($value);
+    }
+
+    $value = array_map('strval', array_values($value));
+    $value_set = array_flip($value);
+    
+    $options = array();
+    foreach($value as $option)
+    {
+      $attributes = array(
+        'value' => self::escapeOnce($option),
+        'selected' => 'selected'
+      );
+      $options[] = $this->renderContentTag('option', self::escapeOnce($option), $attributes);
+    }
+    
+    $this->attributes = $mainAttributes;
+    
+    return $options;
   }
   
   public function render($name, $value = null, $attributes = array(), $errors = array())

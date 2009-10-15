@@ -399,20 +399,11 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
           var offset = widget.element.offset();
           feed.css('left', offset.left);
           
-          var borderBottom = parseInt(widget.element.css('borderBottomWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10);
-          if (borderBottom == NaN) {
-            borderBottom = 0;
-          }
+          var borderBottom = parseInt(widget.element.css('borderBottomWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10) || 0;
           feed.css('top', offset.top + widget.element.outerHeight() - borderBottom);
           
-          var borderLeft = parseInt(feed.css('borderLeftWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10);
-          var borderRight = parseInt(feed.css('borderRightWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10);
-          if (borderLeft == NaN) {
-            borderLeft = 0;
-          }
-          if (borderRight == NaN) {
-            borderRight = 0;
-          }
+          var borderLeft = parseInt(feed.css('borderLeftWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10) || 0;
+          var borderRight = parseInt(feed.css('borderRightWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10) || 0;
           var width = widget.element.outerWidth() - borderLeft - borderRight;
           feed.width(width);
           

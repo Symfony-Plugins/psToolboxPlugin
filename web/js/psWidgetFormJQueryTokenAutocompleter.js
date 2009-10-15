@@ -398,11 +398,21 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
         if (widget.numFeedItems>0) {
           var offset = widget.element.offset();
           feed.css('left', offset.left);
-          var borderBottom = widget.element.css('borderBottomWidth').replace(new RegExp('^([0-9]*)px$'), '$1');
+          
+          var borderBottom = parseInt(widget.element.css('borderBottomWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10);
+          if (borderBottom == NaN) {
+            borderBottom = 0;
+          }
           feed.css('top', offset.top + widget.element.outerHeight() - borderBottom);
           
-          var borderLeft = feed.css('borderLeftWidth').replace(new RegExp('^([0-9]*)px$'), '$1');
-          var borderRight = feed.css('borderRightWidth').replace(new RegExp('^([0-9]*)px$'), '$1');
+          var borderLeft = parseInt(feed.css('borderLeftWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10);
+          var borderRight = parseInt(feed.css('borderRightWidth').replace(new RegExp('^([0-9]*)px$'), '$1'), 10);
+          if (borderLeft == NaN) {
+            borderLeft = 0;
+          }
+          if (borderRight == NaN) {
+            borderRight = 0;
+          }
           var width = widget.element.outerWidth() - borderLeft - borderRight;
           feed.width(width);
           

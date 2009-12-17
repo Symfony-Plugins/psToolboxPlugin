@@ -18,14 +18,14 @@ class psNamedCache
   
   protected function initialize()
   {
-    $config = sfConfig::get('app_psToolbox_named_cache');
+    $config = sfConfig::get('app_psToolbox_named_cache', array());
     
     $options = array(
-      'class' => 'sfNoCache',
+      'class'   => 'sfNoCache',
       'options' => array()
     );
     
-    $options = array_merge($options, $config['options']);
+    $options = array_merge($options, isset($config['options']) ? $config : array());
     
     $this->cache = new $options['class'];
     $this->cache->initialize($options['options']);
@@ -38,14 +38,27 @@ class psNamedCache
   
   static protected function generateKey($name = '', $params = array())
   {
-    $key = $name . ((sizeof($params) > 0) ? ('/' . implode('/', $params)) : '');
+    $params_string = array();
+
+    // Build parameters string "a la" symfony routing
+    if (sizeof($params) > 0)
+    {
+      foreach ($params as $param => $value)
+      {
+        $params_string[]= sprintf('%s/%s', $param, $value);
+      }
+    }
+
+    $key = $name. (sizeof($params) > 0 ? '/'. implode('/', $params_string) : '');
+
     return $key;
   }
 
   static public function get($name, $default = null, $params = array())
-  {
+  {   
     $key = self::generateKey($name, $params);
-    return $this->getInstance()->getCache()->get($key, $default);
+    
+    return self::getInstance()->getCache()->get($key, $default);
   }
   
   static public function getQueryResult($query, $name, $params = array(), $lifetime = null)
@@ -64,6 +77,7 @@ class psNamedCache
     {
       $result = $query->execute();
       $instance->getCache()->set($key, array($query->getRoot()->getComponentName() => $result->toArray(true)), $lifetime);
+
       return $result;
     }
     
@@ -105,7 +119,7 @@ class psNamedCache
   
   static public function getLastModified($name, $params = array())
   {
-    $key = self::generateKey($name, $params);
+    $key = self::generateKey($name, $params);   
     return self::getInstance()->getCache()->getLastModified($key);
   }
 }

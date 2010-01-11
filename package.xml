@@ -12,8 +12,8 @@
   </lead>
   <date>2009-07-14</date>
   <version>
-    <release>0.1.0</release>
-    <api>0.1.0</api>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
   </version>
   <stability>
     <release>alpha</release>
@@ -27,6 +27,13 @@
         <dir name="widget">
           <file name="psWidgetFormJQueryTokenAutocompleter.class.php" role="data"/>
         </dir>
+        <dir name="config">
+          <file name="psToolboxConfigHandler.class.php" role="data" />
+        </dir>
+      </dir>
+       <dir name="config">
+          <file name="config_handlers.yml" role="data"/>
+           <file name="psToolboxPluginConfiguration.class" role="data"/>
       </dir>
       <dir name="web">
         <dir name="js">

@@ -1,5 +1,18 @@
-// $Id$
+/*
+ * This file is part of the psToolboxPlugin package.
+ * (c) 2009-2010 Julien Lirochon
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+/**
+ *
+ *
+ * @package    psToolboxPlugin
+ * @author     Julien Lirochon
+ * @version    SVN: $Id$
+ */
 psWFJTADefaultFormatter = {
   formatToken: function(data) {
     return data.label + ' %close%';

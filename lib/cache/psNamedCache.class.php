@@ -1,5 +1,21 @@
 <?php
+/*
+ * This file is part of the psToolboxPlugin package.
+ * (c) 2009-2010 Julien Lirochon
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+/**
+ *
+ *
+ * @package    psToolboxPlugin
+ * @author     Julien Lirochon
+ * @author     Loic Vernet
+ * 
+ * @version    SVN: $Id$
+ */
 class psNamedCache
 {
   static protected $instance = null;
@@ -18,7 +34,7 @@ class psNamedCache
   
   protected function initialize()
   {
-    $config = sfConfig::get('app_psToolbox_named_cache', array());
+    $config = sfConfig::get('ps_toolbox_named_cache', array());
     
     $options = array(
       'class'   => 'sfNoCache',

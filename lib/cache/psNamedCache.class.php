@@ -121,7 +121,12 @@ class psNamedCache
     $key = self::generateKey($name, $params);
     return self::getInstance()->getCache()->remove($key);
   }
-  
+	
+  static public function removePattern($pattern)
+  {
+    return self::getInstance()->getCache()->removePattern($pattern);	
+  }
+    
   static public function clean($mode = sfCache::ALL)
   {
     return self::getInstance()->getCache()->clean($mode);

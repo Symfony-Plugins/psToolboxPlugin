@@ -376,6 +376,10 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
 
         // delegate events
         feed.bind('click', function(event) {
+          var target = jQuery(event.originalTarget);
+          if (!target.is('li')) {
+            target = target.parent('li');
+          }
           if (target.is('li')) {
             widget.addToken(widget.feedData[target.data('itemIndex')]);
           }
@@ -383,9 +387,12 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
         });
 
         feed.bind('mouseover', function(event) {
-          target = jQuery(event.target);
+          var target = jQuery(event.originalTarget);
+          if (!target.is('li')) {
+            target = target.parent('li');
+          }
           if (target.is('li')) {
-            widget.selectFeedItem($(target).data('itemIndex'));
+            widget.selectFeedItem(target.data('itemIndex'));
           }
         });
 

@@ -376,7 +376,7 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
 
         // delegate events
         feed.bind('click', function(event) {
-          var target = jQuery(event.originalTarget);
+          var target = jQuery(event.target);
           if (!target.is('li')) {
             target = target.parent('li');
           }
@@ -387,7 +387,7 @@ psWidgetFormJQueryTokenAutocompleter.prototype = {
         });
 
         feed.bind('mouseover', function(event) {
-          var target = jQuery(event.originalTarget);
+          var target = jQuery(event.target);
           if (!target.is('li')) {
             target = target.parent('li');
           }

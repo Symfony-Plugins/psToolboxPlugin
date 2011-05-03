@@ -43,8 +43,7 @@ class psNamedCache
     
     $options = array_merge($options, isset($config['options']) ? $config : array());
     
-    $this->cache = new $options['class'];
-    $this->cache->initialize($options['options']);
+    $this->cache = new $options['class']($options['options']);
   }
   
   protected function getCache()
@@ -73,8 +72,10 @@ class psNamedCache
   static public function get($name, $default = null, $params = array())
   {   
     $key = self::generateKey($name, $params);
+
+    $data = self::getInstance()->getCache()->get($key, '[[[DEFAULT]]]');
     
-    return self::getInstance()->getCache()->get($key, $default);
+    return ('[[[DEFAULT]]]' === $data) ? $default : unserialize($data);
   }
   
   static public function getQueryResult($query, $name, $params = array(), $lifetime = null)
@@ -113,7 +114,7 @@ class psNamedCache
   static public function set($name, $data, $params = array(), $lifetime = null)
   {
     $key = self::generateKey($name, $params);
-    return self::getInstance()->getCache()->set($key, $data, $lifetime);
+    return self::getInstance()->getCache()->set($key, serialize($data), $lifetime);
   }
   
   static public function remove($name, $params = array())
